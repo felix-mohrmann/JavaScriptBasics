@@ -1,6 +1,7 @@
 import { add, multiply, factorial } from './math'
 import { students, renameMutable, renameImmutable } from './students'
 import charactersResponse from './characters-response.json'
+import { allNames, allNamesAndOrigin, fetchAllCharacters, livingHumans } from './rm_characters'
 
 /*
 console.log('2 and 40 is', add(2, 40))
@@ -17,28 +18,9 @@ console.log('after immutable', JSON.parse(JSON.stringify(students)))
 console.log('copied students', newStudents)
 */
 
-console.log("everything", charactersResponse)
 
-const livingHumans = charactersResponse.results.filter(human => human.status === "Alive")
-console.log("living Humans: ", livingHumans)
-
-const allNames = charactersResponse.results.map(character => (
-  character.name
-))
-
-/*
-for (let i = 0; i < charactersResponse.results.length; i++) {
-  allNames.push(charactersResponse.results[i].name)
-}
-*/
-
-console.log("All Names: ", allNames)
-
-const allNamesAndOrigin = charactersResponse.results.map(character  => (
-  {
-    name: character.name,
-    origin: character.origin.name
-  }
-));
-
-console.log("All Names with Origin: ", allNamesAndOrigin)
+fetchAllCharacters.then(characters => {
+  console.log('living Humans: ', livingHumans(characters))
+  console.log('All Names: ', allNames(characters))
+  console.log('All Names with Origin: ', allNamesAndOrigin(characters))
+})

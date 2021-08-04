@@ -17,4 +17,28 @@ console.log('after immutable', JSON.parse(JSON.stringify(students)))
 console.log('copied students', newStudents)
 */
 
-console.log(charactersResponse)
+console.log("everything", charactersResponse)
+
+const livingHumans = charactersResponse.results.filter(human => human.status === "Alive")
+console.log("living Humans: ", livingHumans)
+
+const allNames = charactersResponse.results.map(character => (
+  character.name
+))
+
+/*
+for (let i = 0; i < charactersResponse.results.length; i++) {
+  allNames.push(charactersResponse.results[i].name)
+}
+*/
+
+console.log("All Names: ", allNames)
+
+const allNamesAndOrigin = charactersResponse.results.map(character  => (
+  {
+    name: character.name,
+    origin: character.origin.name
+  }
+));
+
+console.log("All Names with Origin: ", allNamesAndOrigin)
